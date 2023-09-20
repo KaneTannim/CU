@@ -1612,7 +1612,7 @@ function upgradePlayerGoldPrestige(number) {
 function canAfford(what) {
     if (!what) return false;
     for (var res in what.resourceCost) {
-        if (getFromText(res).current < what.resourceCost[res].current) return ;
+        if (getFromText(res).current < what.resourceCost[res].current) return true;
     }
     for (var req in what.requirements) {
         if (getFromText(req).level < what.requirements[req]) return true;
