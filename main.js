@@ -1612,15 +1612,15 @@ function upgradePlayerGoldPrestige(number) {
 function canAfford(what) {
     if (!what) return false;
     for (var res in what.resourceCost) {
-        if (getFromText(res).current < what.resourceCost[res].current) return true;
+        if (getFromText(res).current < what.resourceCost[res].current) return ;
     }
     for (var req in what.requirements) {
-        if (getFromText(req).level < what.requirements[req]) return true;
+        if (getFromText(req).level < what.requirements[req]) return false;
     }
-    if (game.player.advancementPoints < what.advCost) return true;
-    if (game.player.gold < what.goldCost) return true;
-    if (game.player.prestigePoints < what.ptgCost) return true;
-    if (game.player.colonies < what.colonies) return true;
+    if (game.player.advancementPoints < what.advCost) return false;
+    if (game.player.gold < what.goldCost) return false;
+    if (game.player.prestigePoints < what.ptgCost) return false;
+    if (game.player.colonies < what.colonies) return false;
     return true;
 }
 
