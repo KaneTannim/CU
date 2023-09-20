@@ -1111,6 +1111,7 @@ function buyBuilding(building, number, forFree = false) {
 function buyUpgrade(upgrade) {
     if (!upgrade || !canAfford(upgrade)) return;
     var isBought = true;
+    upgrade.bought = true;
     if (typeof upgrade.level === "undefined" || upgrade.level >= upgrade.maxLevel) {
         isBought = true;
         upgrade.bought = true;
