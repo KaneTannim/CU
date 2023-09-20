@@ -1112,7 +1112,6 @@ function buyBuilding(building, number, forFree = false) {
 function buyUpgrade(upgrade) {
     if (!upgrade || !canAfford(upgrade)) return;
     var isBought = false;
-    upgrade.bought = true;
     if (typeof upgrade.level === "undefined" || upgrade.level >= upgrade.maxLevel) {
         isBought = true;
         upgrade.bought = true;
@@ -1514,8 +1513,8 @@ function upgradeMaxLeaders(number) {
  */
 function upgradeUpgradeCost(number, isAge = false) {
     if (!number || number == 0) return;
-    if (isAge) game.player.ageCost = prettify(game.player.ageCost + number, -4);
-    else game.player.upgradeCost = prettify(game.player.upgradeCost + number, -4);
+    if (isAge) game.player.ageCost = prettify(game.player.ageCost + number, 4);
+    else game.player.upgradeCost = prettify(game.player.upgradeCost + number, 4);
     for (var upg in game.upgrades) {
         recalculateUpgradeCost(game.upgrades[upg]);
     }
@@ -1529,7 +1528,7 @@ function upgradeUpgradeCost(number, isAge = false) {
  */
 function upgradeWorkerCost(number) {
     if (!number || number == 0) return;
-    game.player.workerCost = prettify(game.player.workerCost + number, -4);
+    game.player.workerCost = prettify(game.player.workerCost + number, 4);
     for (var wor in game.workers) {
         recalculateWorkerCost(game.workers[wor]);
     }
@@ -1547,7 +1546,7 @@ function upgradeWorkerCostRate(wor, res, rate) {
     var worker = getFromText(wor);
     var resource = getFromText(res);
     if (rate == 0 || !worker || !resource) return;
-    worker.resourceCost[res].rate = prettify(worker.resourceCost[res].rate + rate, -2);
+    worker.resourceCost[res].rate = prettify(worker.resourceCost[res].rate + rate, 2);
     recalculateWorkerCost(worker);
 }
 
@@ -1558,7 +1557,7 @@ function upgradeWorkerCostRate(wor, res, rate) {
  */
 function upgradeBuildingCost(number) {
     if (!number || number == 0) return;
-    game.player.buildingCost = prettify(game.player.buildingCost + number, -4);
+    game.player.buildingCost = prettify(game.player.buildingCost + number, 4);
     for (var bld in game.buildings) {
         recalculateBuildingCost(game.buildings[bld]);
     }
