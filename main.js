@@ -1514,8 +1514,8 @@ function upgradeMaxLeaders(number) {
  */
 function upgradeUpgradeCost(number, isAge = false) {
     if (!number || number == 0) return;
-    if (isAge) game.player.ageCost = prettify(game.player.ageCost + number, 4);
-    else game.player.upgradeCost = prettify(game.player.upgradeCost + number, 4);
+    if (isAge) game.player.ageCost = prettify(game.player.ageCost + number, -4);
+    else game.player.upgradeCost = prettify(game.player.upgradeCost + number, -4);
     for (var upg in game.upgrades) {
         recalculateUpgradeCost(game.upgrades[upg]);
     }
@@ -1529,7 +1529,7 @@ function upgradeUpgradeCost(number, isAge = false) {
  */
 function upgradeWorkerCost(number) {
     if (!number || number == 0) return;
-    game.player.workerCost = prettify(game.player.workerCost + number, 4);
+    game.player.workerCost = prettify(game.player.workerCost + number, -4);
     for (var wor in game.workers) {
         recalculateWorkerCost(game.workers[wor]);
     }
@@ -1547,7 +1547,7 @@ function upgradeWorkerCostRate(wor, res, rate) {
     var worker = getFromText(wor);
     var resource = getFromText(res);
     if (rate == 0 || !worker || !resource) return;
-    worker.resourceCost[res].rate = prettify(worker.resourceCost[res].rate + rate, 2);
+    worker.resourceCost[res].rate = prettify(worker.resourceCost[res].rate + rate, -2);
     recalculateWorkerCost(worker);
 }
 
@@ -1558,7 +1558,7 @@ function upgradeWorkerCostRate(wor, res, rate) {
  */
 function upgradeBuildingCost(number) {
     if (!number || number == 0) return;
-    game.player.buildingCost = prettify(game.player.buildingCost + number, 4);
+    game.player.buildingCost = prettify(game.player.buildingCost + number, -4);
     for (var bld in game.buildings) {
         recalculateBuildingCost(game.buildings[bld]);
     }
@@ -1613,15 +1613,15 @@ function upgradePlayerGoldPrestige(number) {
 function canAfford(what) {
     if (!what) return false;
     for (var res in what.resourceCost) {
-        if (getFromText(res).current < what.resourceCost[res].current) return false;
+        if (getFromText(res).current < what.resourceCost[res].current) return true;
     }
     for (var req in what.requirements) {
-        if (getFromText(req).level < what.requirements[req]) return false;
+        if (getFromText(req).level < what.requirements[req]) return true;
     }
-    if (game.player.advancementPoints < what.advCost) return false;
-    if (game.player.gold < what.goldCost) return false;
-    if (game.player.prestigePoints < what.ptgCost) return false;
-    if (game.player.colonies < what.colonies) return false;
+    if (game.player.advancementPoints < what.advCost) return true;
+    if (game.player.gold < what.goldCost) return true;
+    if (game.player.prestigePoints < what.ptgCost) return true;
+    if (game.player.colonies < what.colonies) return true;
     return true;
 }
 
