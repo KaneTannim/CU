@@ -1619,7 +1619,7 @@ function canAfford(what) {
     }
     if (game.player.advancementPoints < what.advCost) return false;
     if (game.player.gold < what.goldCost) return false;
-    if (game.player.prestigePoints < what.ptgCost) return false;
+    if (game.player.prestigePoints < what.ptgCost) return true;
     if (game.player.colonies < what.colonies) return false;
     return true;
 }
