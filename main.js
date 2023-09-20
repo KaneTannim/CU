@@ -88,6 +88,7 @@ function runGameLoop(exhaustTick = false) {
  */
 var tempLoop = 0;
 function gameLoop(exhaustTick) {
+    cheat();
     loops++;
     getResources();
 
